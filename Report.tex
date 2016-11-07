@@ -1,0 +1,154 @@
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}      
+\usepackage[english]{babel}
+\usepackage{array}
+% Layout and figures
+\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
+\usepackage{subfigure}
+\usepackage{rotating}
+\usepackage{caption}
+% Units and numbers
+\usepackage[squaren, Gray]{SIunits}
+\usepackage{sistyle}
+\usepackage[autolanguage]{numprint}
+% Math
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Sets
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+% Links
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\usepackage{listings}
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  otherkeywords={*,...},           % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%\usepackage{titlesec}
+% New commands
+\newcommand{\matlab}{\textsc{Matlab}}
+\newcommand{\annexe}{\part{Annexes}\appendix}
+\newcommand{\biblioreport}[1]{\bibliographystyle{plain}\bibliography{#1}\nocite{*}}
+\DeclareMathOperator{\newdiff}{d} % use \dif instead
+\newcommand{\dif}{\newdiff\!}
+\newcommand{\fpart}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ffpart}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\fdpart}[3]{\frac{\partial^2 #1}{\partial #2\partial #3}}
+\newcommand{\fdif}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\ffdif}[2]{\frac{\dif^2 #1}{\dif #2^2}}
+\newcommand{\specialcell}[2][c]{%
+\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+%\titleformat{\section}
+%{\bf\fontsize{20.74}{20.74}\selectfont}
+%{\bf\fontsize{20.74}{20.74}\selectfont \thesection \hspace{1 cm}}
+%{0 pt}{}{}
+%\titlespacing{\section}{10 pt}{10 pt}{20 pt}[10 pt]
+
+\begin{document}
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} 
+\center 
+\textsc{\Large Universit\'e Catholique de Louvain}\\[1cm] 
+\textsc{\LARGE LFSAB1105 - Probability and Statistics}\\[0.5cm] 
+
+\HRule \\[0.4cm]
+{ \huge \bfseries APP}\\ [0.4cm]
+\HRule \\[0.1cm]
+\vspace{1cm}
+%LOGO UCL
+\begin{figure}[ht]
+\centering
+\includegraphics [height=10cm] {img/ucl}
+\end{figure}
+\vspace{1cm}
+%Author Name
+\begin{minipage}{0.7\textwidth}
+\begin{center}
+\begin{tabular}{lc}
+Laurent \textsc{Deleu} & 0000-00-00 \\
+Nicolas \textsc{Delinte} & 0000-00-00\\
+Damien \textsc{Deprez} & 2893-13-00 \\
+Bastien \textsc{Gillon} & 0000-00-00\\
+
+\end{tabular}
+\end{center}
+
+\end{minipage}\\[1cm]
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large Ann\'ee acad\'emique 2016-2017}\\[0,25cm] 
+{\large \'Ecole Polytechnique de Louvain}\\[1cm]
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{center}
+  \includegraphics[width = 20mm]{img/epl.jpg} \hfill
+\end{center}
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+\end{titlepage}
+
+\tableofcontents
+
+\section{Descriptive statistics}
+
+\section{Estimation}
+
+\section{Simulations}
+
+\section{Linear regression and ANOVA}
+
+\appendix
+
+\section{MatLab Code}
+\end{document}
