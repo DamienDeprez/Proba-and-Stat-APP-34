@@ -39,6 +39,7 @@
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
 
+\usepackage{enumerate}
 \usepackage{listings}
 \lstset{ %
   backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
@@ -141,6 +142,53 @@ Bastien \textsc{Gillon} & 0000-00-00\\
 \tableofcontents
 
 \section{Descriptive statistics}
+
+\begin{enumerate}[(a)]
+
+\item In order to find $t_{p}$ the quantile of order p such that $ P(T \leq t_{p}) = p $, we need to find the solution to the following equation.
+
+$$F_{\alpha , \beta}(t) = \int_{0}^{t_{p}} f_{\alpha , \beta}(t') dt' = p $$
+\\
+Before integrating the density function, note that :
+
+$$ \frac{\mathrm{d} }{\mathrm{d} x} (1-t^\alpha)^\beta = - \alpha \beta t^{\alpha-1} (1-t^\alpha)^{\beta -1}$$
+\\
+Thus,
+
+$$F_{\alpha , \beta} (t_p) \quad = \int_{0}^{t_{p}} \alpha \beta t'^{\alpha-1} (1-t'^\alpha)^{\beta -1} dt' = \left [  -(1-t'^\alpha)^\beta \right ]^{t_{p}}_{0} = 1-(1-t_{p}^{\alpha})^\beta$$
+\\
+The result can be then easily found : $\quad t_p = (1-(1-p)^{\frac{1}{\beta}})^{\frac{1}{\alpha}}$
+
+\item Let's apply the general expression of the moment of order k to our r.v.
+
+\nonumber
+\begin{equation} \label{eq1}
+\begin{split}
+\mathbb{E}(T^k) & = \int_{0}^{1} t^k \alpha \beta t^{\alpha -1} (1-t^\alpha)^{\beta-1} dt \\
+ & = \beta \int_{0}^{1} \tau^{\frac{k}{\alpha}} (1-\tau)^{\beta -1} d\tau \\
+ & = \beta \frac{\Gamma(\frac{k}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{k}{\alpha}+1+\beta)}
+\end{split}
+\end{equation}
+\\
+In order to obtain an expression similar to the hint given in the instructions, it necessary to use a variable change : $\tau = t^\alpha$.
+
+\item The previous results allow us to find some statistics describing our variable T.
+\\
+$\textbf{Mean :} \quad \mu = \mathbb{E}(T) = \beta \frac{\Gamma(\frac{1}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{1}{\alpha}+1+\beta)} $
+\\
+$\textbf{Variance :} \quad \sigma^2 = \mathbb{E}(T^2)-(\mathbb{E}(T))^2 = \beta\frac{\Gamma(\frac{2}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{2}{\alpha}+1+\beta)} - \beta^2 \frac{\Gamma(\frac{1}{\alpha}+1)^2\Gamma(\beta)^2}{\Gamma(\frac{1}{\alpha}+1+\beta)^2}$
+\\
+$\textbf{Median :} \quad t_{0.5} = (1-\frac{1}{2^{\frac{1}{\beta}}})^\frac{1}{\alpha}$
+\\
+$\textbf{Range :} \quad \textup{Range} = 1$ since $f$ is strictly positive $\forall t \in \left ]  0;1 \right [ $
+\\
+$\textbf{Interquartile range :} \quad \textup{IQR} = t_{0.75} - t_{0.25} = (1-\frac{1}{4^\frac{1}{\beta}})^\frac{1}{\alpha} - (1-(\frac{3}{4})^\frac{1}{\beta})^\frac{1}{\alpha}$
+\\
+$\textbf{Coefficient of variation :} \quad cv = \frac{\sigma}{\mu} = \frac{\sqrt{\beta\frac{\Gamma(\frac{2}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{2}{\alpha}+1+\beta)} - \beta^2 \frac{\Gamma(\frac{1}{\alpha}+1)^2\Gamma(\beta)^2}{\Gamma(\frac{1}{\alpha}+1+\beta)^2}}}{\beta \frac{\Gamma(\frac{1}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{1}{\alpha}+1+\beta)}}$
+
+\item Let's fix our parameters to have an idea of the values of our statistics. For $\alpha_0 = 2$ and $\beta_0 = 4$, we obtain : $\mu = 0.4063$ , $\sigma^2 = 0.0349$ , $t_{0.5} = 0.3989$ , $\textup{IQR} = 0.2778$ and $cv = 0.4596$.
+
+\end{enumerate}
 
 \section{Estimation}
 
