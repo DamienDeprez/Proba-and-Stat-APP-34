@@ -110,7 +110,7 @@
 \begin{minipage}{0.7\textwidth}
 \begin{center}
 \begin{tabular}{lc}
-Laurent \textsc{Deleu} & 0000-00-00 \\
+Laurent \textsc{Deleu} & 6040-13-00 \\
 Nicolas \textsc{Delinte} & 4801-13-00\\
 Damien \textsc{Deprez} & 2893-13-00 \\
 Bastien \textsc{Gillon} & 0000-00-00\\
@@ -187,6 +187,20 @@ $\textbf{Interquartile range :} \quad \textup{IQR} = t_{0.75} - t_{0.25} = (1-\f
 $\textbf{Coefficient of variation :} \quad cv = \frac{\sigma}{\mu} = \frac{\sqrt{\beta\frac{\Gamma(\frac{2}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{2}{\alpha}+1+\beta)} - \beta^2 \frac{\Gamma(\frac{1}{\alpha}+1)^2\Gamma(\beta)^2}{\Gamma(\frac{1}{\alpha}+1+\beta)^2}}}{\beta \frac{\Gamma(\frac{1}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{1}{\alpha}+1+\beta)}}$
 
 \item Let's fix our parameters to have an idea of the values of our statistics. For $\alpha_0 = 2$ and $\beta_0 = 4$, we obtain : $\mu = 0.4063$ , $\sigma^2 = 0.0349$ , $t_{0.5} = 0.3989$ , $\textup{IQR} = 0.2778$ and $cv = 0.4596$.
+
+\item The probability that no more than halve of our 50 observations will have a value less than 0.5, can be found in two steps. We firstly calculate the probability that an observation is less than 0.5:
+
+$$P(T<0.5) = \int_{-\infty}^{0.5} = F(0.5) - F(0) = 0.6836 $$
+\\
+Let's define Y, the total number of successful observations. This new r.v. follows a binomial distribution with $p=0.6836$, our probability of success and $n=50$, our number of trials. Our second step is then to calculate the probability that Y cannot exceed 25.
+
+$$P(X \leq 25) = \sum_{k=0}^{25} C_{k}^{50}p^{k}(1-p)^{50-k} = 0.0052$$
+
+To obtain such a result, it is necessary to make a summation which can be avoided if we use the Central Limit Theorem. This method uses the fact that the r.v. $\frac{Y-\mu}{\sigma / \sqrt{n}}$ follows a standard normal distribution:
+
+$$P(Y \leq 25) = P\left ( \frac{Y-np}{\sqrt{np(1-p)}} \leq \frac{25-50\cdot0.6836}{\sqrt{50\cdot0.6836\cdot(1-0.6836)}} \right ) \approx P(Z < -2.7915) = 0.0026$$
+
+Our approximated result is not as close as we could have expected, but it is still in the same order of magnitude. This is caused by the huge gap between 25 and 34.2, the mean of our binomial distribution, which depends on our choice of parameters. The further we get away from this mean, the less accurate will be the approximation.
 
 \end{enumerate}
 
