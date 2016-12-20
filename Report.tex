@@ -202,6 +202,17 @@ $$P(Y \leq 25) = P\left ( \frac{Y-np}{\sqrt{np(1-p)}} \leq \frac{25-50\cdot0.683
 
 Our approximated result is not as close as we could have expected, but it is still in the same order of magnitude. This is caused by the huge gap between 25 and 34.2, the mean of our binomial distribution, which depends on our choice of parameters. The further we get away from this mean, the less accurate will be the approximation.
 
+\item From one generated $idd$ sample of size $n = 20$, we observed the following statistics : $\mu = 0.3919$, $\sigma^2 = 0.0432$, $t_0.5 = 0.3922$, $\textup{IQR} = 0.3851$ and $cv = 0.5302$.
+These values are very close to the ones calculated previously.
+
+\item As we increase the sample size progressively, the observed statistics approach their theoretical value. We may therefore conclude that the approximation U $\sim$ Unif[0, 1] tends to converge for an increasing size of the sample.
+
+\begin{figure}
+    \centering
+  \includegraphics[width = 10cm]{values.png}
+  \caption{Convergence of statistics for an increasing sample size}
+\end{figure}
+
 \end{enumerate}
 
 \section{Estimation}
