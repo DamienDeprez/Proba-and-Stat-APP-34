@@ -10,7 +10,7 @@ for i=1:n
 end
 tt=sqrt(1-(1-U).^(1/4)) ;
 
-u=sum(tt)/20*j;
+u=mean(tt);
 Med=median(tt);
 V=var(tt);
 IQR=iqr(tt);
