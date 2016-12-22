@@ -196,7 +196,7 @@ Let's define Y, the total number of successful observations. This new r.v. follo
 
 $$P(X \leq 25) = \sum_{k=0}^{25} C_{k}^{50}p^{k}(1-p)^{50-k} = 0.0052$$
 
-To obtain such a result, it is necessary to make a summation which can be avoided if we use the Central Limit Theorem. This method uses the fact that the r.v. $\frac{Y-\mu}{\sigma / \sqrt{n}}$ follows a standard normal distribution:
+To obtain such a result, it is necessary to make a long summation which can be avoided if we use the Central Limit Theorem. This method uses the fact that the r.v. $\frac{Y-\mu}{\sigma / \sqrt{n}}$ follows a standard normal distribution:
 
 $$P(Y \leq 25) = P\left ( \frac{Y-np}{\sqrt{np(1-p)}} \leq \frac{25-50\cdot0.6836}{\sqrt{50\cdot0.6836\cdot(1-0.6836)}} \right ) \approx P(Z < -2.7915) = 0.0026$$
 
@@ -205,7 +205,7 @@ Our approximated result is not as close as we could have expected, but it is sti
 \item From one generated $idd$ sample of size $n = 20$, we observed the following statistics : $\mu = 0.3919$, $\sigma^2 = 0.0432$, $t_0.5 = 0.3922$, $\textup{IQR} = 0.3851$ and $cv = 0.5302$.
 These values are very close to the ones calculated previously.
 
-\item As we increase the sample size progressively, the observed statistics approach their theoretical value. We may therefore conclude that the approximation U $\sim$ Unif[0, 1] tends to converge for an increasing size of the sample.
+\item As we progressively increase the sample size, the observed statistics approach their theoretical value. We may therefore conclude that the approximation U $\sim$ Unif[0, 1] tends to converge for an increasing size of the sample.
 
 \begin{figure}
     \centering
@@ -216,6 +216,56 @@ These values are very close to the ones calculated previously.
 \end{enumerate}
 
 \section{Estimation}
+
+\begin{enumerate}[(a)]
+
+\item A first estimator could be taking the rounded value at $ 95\% $ of the ordered sample:
+$$\hat{q}_s = T_{[0.95\cdot n]}$$
+This estimator would be unbiased if our sample values were following a uniform distribution which is not our case. However, as the median is often approximated by the middle of a sample, we use here the same kind of hypothesis.
+
+\item Seeking a pair of estimators with the method of moments involves finding two equations where our sample moment and the distribution one are equated for both orders. From the expression we need to verify, we see that it is easier to use the moments of order $\alpha$ and $2\alpha$.
+
+$$\mu_\alpha = \mathbb{E}(T^\alpha) = m_\alpha = \frac{1}{n}\sum Y_{i}^{\alpha}$$
+$$\mu_{2\alpha} = \mathbb{E}(T^{2\alpha})= m_{2\alpha} = \frac{1}{n}\sum Y_{i}^{2\alpha}$$
+
+Since we know the expression of a moment of order k (found in Part 1), we can develop $\mu_\alpha$ and $\mu_{2\alpha}$. The expression is then simplified using the property $\Gamma(n+1) = n!$
+
+$$\frac{1}{n}\sum T_i^\alpha = \beta \frac{\Gamma(\frac{\alpha}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{\alpha}{\alpha}+1+\beta)} = \frac{\beta(\beta-1)!}{(\beta+1)!} = \frac{1}{\beta+1}$$
+
+$$\frac{1}{n}\sum T_i^{2\alpha} = \frac{\Gamma(\frac{2\alpha}{\alpha}+1)\Gamma(\beta)}{\Gamma(\frac{2\alpha}{\alpha}+1+\beta)} = \frac{2\beta(\beta-1)!}{(\beta+2)!} = \frac{2}{(\beta+2)(\beta+1)}$$
+
+By rearranging the terms of our first line, we find an expression for $\hat{\beta}_M$ which is the second equation we were looking for. By injecting this into our second line, we then obtain the first equation to be verified after another rearrangement of terms.
+
+$$\hat{\beta}_M = \frac{n}{\frac{1}{n}\sum T_i^{\hat{\alpha}_M}} - 1$$
+
+$$\left ( \frac{1}{n}\sum T_i^{2\hat{\alpha}_M} \right )  \left (n + \frac{1}{n}\sum T_i^{\hat{\alpha}_M} \right )  \left ( \frac{1}{n}\sum T_i^{\hat{\alpha}_M} \right )^{-2} = 2$$
+
+\item We seek the two parameters $\hat{\alpha}_L$ and $\hat{\beta}_L$ that maximise our likelihood function. 
+
+$$L(T_i|\alpha,\beta) = \prod_{i=1}^{n} f_{\alpha,\beta}(T_i) = \prod_{i=1}^{n} \alpha\beta T_i^{\alpha-1}(1-T_i^\alpha)^{\beta-1}$$
+
+In order to make the following derivations easier, we apply the natural logarithm to our function. This will not change the solution of our maximisation problem as the logarithm is a monotonically increasing function.
+
+$$l(T_i|\alpha,\beta) = \ln(L(T_i|\alpha,\beta)) = \sum_{i=1}^n \left [ \alpha\beta T_i^{\alpha-1}(1-T_i^\alpha)^{\beta-1} \right ]$$
+
+We now derive our function with respect to each of our parameters and find the zeros of these derivatives.
+
+$$ \frac{\partial l(\alpha, \beta)}{\partial \alpha} = \frac{n}{\alpha} + \sum_{i=1}^n \ln(T_i) + (1-\beta) \sum_{i=1}^{n} \frac{\ln(T_i) T_i^\alpha}{1-T_i^\alpha} = 0$$
+$$ \frac{\partial l(\alpha, \beta)}{\partial \beta} = \frac{n}{\beta} + \sum_{i=1}^{n} \ln(1- T_i^\alpha)=0$$
+
+As for the previous method, we isolate $\hat{\beta}_L$ in the second line and then inject its expression in the first one. After a rearrangement of terms, we obtain the sought expressions.
+
+$$\frac{1}{\hat{\alpha}_L} + \left ( \frac{1}{\sum_{i=1}^n \ln(1-T_i^{\hat{\alpha}_L})} + \frac{1}{n}\right ) \sum_{i=1}^{n}\frac{\ln(T_i)T_i^{\hat{\alpha}_L}}{1-T_i^{\hat{\alpha}_L}} = - \frac{1}{n} \sum_{i=1}^n \ln(T_i)$$
+
+$$\hat{\beta}_L = \frac{-n}{\sum_{i=1}^n \ln(1-T_i^{\hat{\alpha}_L})}$$
+
+\item We know that our sample follows a $f_{\alpha,\beta}$ distribution and we now have estimators for the parameters $\alpha$ and $\beta$. We can therefore use our relation from Part 1 between a quantile of order p and the distribution parameters to have the expression of a new estimator for $t_{0.95}$.
+
+$$ \hat{q}_M = (1-0.05^{\frac{1}{\hat{\beta}_M}})^{\frac{1}{\hat{\alpha}_M}}$$
+
+$$ \hat{q}_L = (1-0.05^{\frac{1}{\hat{\beta}_L}})^{\frac{1}{\hat{\alpha}_L}}$$
+
+\end{enumerate}
 
 \section{Simulations}
 
