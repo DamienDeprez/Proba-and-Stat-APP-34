@@ -194,7 +194,7 @@ $$P(T<0.5) = \int_{-\infty}^{0.5} = F(0.5) - F(0) = 0.6836 $$
 \\
 Let's define Y, the total number of successful observations. This new r.v. follows a binomial distribution with $p=0.6836$, our probability of success and $n=50$, our number of trials. Our second step is then to calculate the probability that Y cannot exceed 25.
 
-$$P(X \leq 25) = \sum_{k=0}^{25} C_{k}^{50}p^{k}(1-p)^{50-k} = 0.0052$$
+$$P(X \leq 25) = 1-\sum_{k=25}^{50} C_{k}^{50}p^{k}(1-p)^{50-k} = 0.0022$$
 
 To obtain such a result, it is necessary to make a long summation which can be avoided if we use the Central Limit Theorem. This method uses the fact that the r.v. $\frac{Y-\mu}{\sigma / \sqrt{n}}$ follows a standard normal distribution:
 
