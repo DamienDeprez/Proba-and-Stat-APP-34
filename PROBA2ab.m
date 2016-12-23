@@ -11,9 +11,8 @@ for j=1:N
     BM=n/sum(tt.^a)-1;   %Estimator for method of moments
     W=zeros(1,20);
     for i=1:n
-        W(i)=log(1-U(i)^a);
+        W(i)=log(1-tt(i)^a);
     end
-    tt=sqrt(1-(1-U).^(1/4)) ;
     BL=-n/sum(W);       %Estimator for MLE
     %Calcul of the mediane and the 3 estimators
 
