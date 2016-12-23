@@ -139,7 +139,7 @@ Bastien \textsc{Gillon} & 0000-00-00\\
 \vfill % Fill the rest of the page with whitespace
 \end{titlepage}
 
-\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Descriptive statistics}
 
@@ -215,6 +215,10 @@ These values are very close to the ones calculated previously.
 
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
 \section{Estimation}
 
 \begin{enumerate}[(a)]
@@ -267,9 +271,54 @@ $$ \hat{q}_L = (1-0.05^{\frac{1}{\hat{\beta}_L}})^{\frac{1}{\hat{\alpha}_L}}$$
 
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Simulations}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
 \section{Linear regression and ANOVA}
+
+\begin{enumerate}[(a)]
+
+\item From Figure 2.a, we can observe that there is no linear relationship between the fuel consumption (Y) and horsepower (X). Yet, two interpretations can be done from the two other graphs. The first one is that the relation between our Y and W variables is $W = \ln(Y)$. The second one is that there seems to be a linear correlation between our W and X variables. Hence, it is much more reasonable to fit a linear regression model between $\ln(Y)$ and X.
+
+\begin{figure}
+    \centering
+    \includegraphics[width = 15cm]{dataset.eps}
+    \caption{Behaviours between the variables}
+\end{figure}
+
+\item We seek to find $\hat{\beta}_1$ and $\hat{\beta}_0$, the parameters of the line fitting the best to our data points. 
+
+$$\mathbb{E}(\ln(Y)) = \beta_1 \cdot X + \beta_0$$
+
+To achieve this, we use the method of least squares and therefore use the following expressions:
+$$\hat{\beta}_1 = \frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n(x_i-\bar{x})^2}
+\quad \textup{and} \quad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}$$
+
+The results are written in Table 1 and shown in Figure 2.(c). The interpretation we can make is that the fuel consumption increases as the horsepower does since the slope $\hat{\beta}_1$ is positive. It is even a exponential increase as we have a linear relation between X and $\ln(Y)$.
+
+\begin{table}[h]
+    \begin{centering}
+    \begin{tabular}{|c|c|}
+    \hline 
+    $\hat{\beta}_1$ & 0.0041\tabularnewline
+    \hline 
+    $\hat{\beta}_0$ & -1.6117\tabularnewline
+    \hline 
+    \end{tabular}
+    \par\end{centering}
+    \caption{Coefficients of our linear regression}
+\end{table}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
 
 \appendix
 
