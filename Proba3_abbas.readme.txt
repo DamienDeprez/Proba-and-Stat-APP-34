@@ -1,0 +1,3 @@
+Code d'Abbas pour la partie 3
+Chaque sous-question a son code ce qui permet de comprendre plus facilement
+Mais code erroné car on utilise alpha0 directement pour trouver betaM etc..
