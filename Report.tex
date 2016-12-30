@@ -157,7 +157,7 @@ Thus,
 
 $$F_{\alpha , \beta} (t_p) \quad = \int_{0}^{t_{p}} \alpha \beta t'^{\alpha-1} (1-t'^\alpha)^{\beta -1} dt' = \left [  -(1-t'^\alpha)^\beta \right ]^{t_{p}}_{0} = 1-(1-t_{p}^{\alpha})^\beta$$
 \\
-The result can be then easily found : $\quad t_p = (1-(1-p)^{\frac{1}{\beta}})^{\frac{1}{\alpha}}$
+Then, the result can be easily found : $\quad t_p = (1-(1-p)^{\frac{1}{\beta}})^{\frac{1}{\alpha}}$
 
 \item Let's apply the general expression of the moment of order k to our r.v.
 
@@ -170,7 +170,7 @@ The result can be then easily found : $\quad t_p = (1-(1-p)^{\frac{1}{\beta}})^{
 \end{split}
 \end{equation}
 \\
-In order to obtain an expression similar to the hint given in the instructions, it necessary to use a variable change : $\tau = t^\alpha$.
+In order to obtain an expression similar to the hint given in the instructions, it is necessary to use a variable change : $\tau = t^\alpha$.
 
 \item The previous results allow us to find some statistics describing our variable T.
 \\
@@ -188,11 +188,11 @@ $\textbf{Coefficient of variation :} \quad cv = \frac{\sigma}{\mu} = \frac{\sqrt
 
 \item Let's fix our parameters to have an idea of the values of our statistics. For $\alpha_0 = 2$ and $\beta_0 = 4$, we obtain : $\mu = 0.4063$ , $\sigma^2 = 0.0349$ , $t_{0.5} = 0.3989$ , $\textup{IQR} = 0.2778$ and $cv = 0.4596$.
 
-\item The probability that no more than halve of our 50 observations will have a value less than 0.5, can be found in two steps. We firstly calculate the probability that an observation is less than 0.5:
+\item The probability that no more than halve of our 50 observations will have a value less than 0.5, can be found in two steps. First, we calculate the probability that an observation is less than 0.5:
 
 $$P(T<0.5) = \int_{-\infty}^{0.5} = F(0.5) - F(0) = 0.6836 $$
 \\
-Let's define Y, the total number of successful observations. This new r.v. follows a binomial distribution with $p=0.6836$, our probability of success and $n=50$, our number of trials. Our second step is then to calculate the probability that Y cannot exceed 25.
+Let's define Y, the total number of successful observations. This new r.v. follows a binomial distribution with $p=0.6836$, our probability of success and $n=50$, our number of trials. Our second step is to calculate the probability that Y cannot exceed 25.
 
 $$P(X \leq 25) = \sum_{k=0}^{25} C_{k}^{50}p^{k}(1-p)^{50-k} = 0.0052$$
 
@@ -200,7 +200,7 @@ To obtain such a result, it is necessary to make a long summation which can be a
 
 $$P(Y \leq 25) = P\left ( \frac{Y-np}{\sqrt{np(1-p)}} \leq \frac{25-50\cdot0.6836}{\sqrt{50\cdot0.6836\cdot(1-0.6836)}} \right ) \approx P(Z < -2.7915) = 0.0026$$
 
-Our approximated result is not as close as we could have expected, but it is still in the same order of magnitude. This is caused by the huge gap between 25 and 34.2, the mean of our binomial distribution, which depends on our choice of parameters. The further we get away from this mean, the less accurate will be the approximation.
+Our approximated result is not as close as we could have expected, but it is still in the same order of magnitude. This is caused by the huge gap between 25 and 34.2, the mean of our binomial distribution, which depends on our choice of parameters. The further we get away from this mean, the less accurate the approximation will be.
 
 \item From one generated $idd$ sample of size $n = 20$, we observed the following statistics : $\mu = 0.3919$, $\sigma^2 = 0.0432$, $t_0.5 = 0.3922$, $\textup{IQR} = 0.3851$ and $cv = 0.5302$.
 These values are very close to the ones calculated previously.
