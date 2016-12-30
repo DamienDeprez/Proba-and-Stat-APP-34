@@ -120,6 +120,10 @@ end
 B1 = Sxw / Sxx
 Bo = muW - B1 * muX
 
+%-Question 4d
+expectedW=Bo+1000*B1;
+expectedFuelConsum=exp(expectedW)
+
 %==============================================================
 % REPRESENTATIONS GRAPHIQUES
 
