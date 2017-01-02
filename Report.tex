@@ -397,7 +397,7 @@ The results are written in Table 1 and shown in Figure 2.(c). The interpretation
 \nonumber
 \begin{equation} \label{eq1}
 \begin{split}
-\sum_{i=1}^n(y_i-\bar{y})^2 & = \sum_{i=1}^n(\hat{y}_i-\bar{y})^2 + \sum_{i=1}^n(y_i-\hat{y}_i)^2 \qquad \textup{with} \quad \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i \\
+\sum_{i=1}^n(W_i-\bar{W})^2 & = \sum_{i=1}^n(\hat{W}_i-\bar{W})^2 + \sum_{i=1}^n(W_i-\hat{W}_i)^2 \qquad \textup{with} \quad \hat{W}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i \\
  \textup{SS Total} & = \textup{SS Regression} + \textup{SS Errors}
 \end{split}
 \end{equation}
@@ -421,7 +421,7 @@ Since $Y = e^{W}$ and that $X^*=1000$, $\beta_1=0.0041$ and $\beta_0=-1.6117$, w
 
 We are now interested into finding a $95\%$ prediction interval for this value. We know that the error made using the previous estimator, is normally distributed with a null mean and a certain variance. From this, it can be shown that the following variable T possesses a Student's t distribution.
 
-$$T = \frac{W^*-\hat{W^*}}{S\sqrt{1+\frac{1}{n}+\frac{(x^*-\bar{x})^2}{S_{xx}}}} \qquad \textup{with} \quad S^2= \frac{S_{xx}}{n-1} \qquad \textup{and} \quad S_{xx} = \sum_{i=1}^n (x_i-\bar{x})^2  $$
+$$T = \frac{W^*-\hat{W^*}}{S\sqrt{1+\frac{1}{n}+\frac{(x^*-\bar{x})^2}{S_{xx}}}} \qquad \textup{with} \quad S^2= \frac{\sum_{i=1}^n(W_i-\hat{W}-\bar{(W_i-\hat{W})})^2}{n-1} \qquad \textup{and} \quad S_{xx} = \sum_{i=1}^n (x_i-\bar{x})^2  $$
 
 As in the confidence intervals method, we observe that $P(-t_{\alpha /2} < T < t_{\alpha /2}) = 1-\alpha$
 
