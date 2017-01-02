@@ -434,19 +434,35 @@ $$P\left (1.7767 < W^* < 3.2781 \right ) = 0.95$$
 
 In terms of Y, the interval $Y \in \left [ 5.91;26.5 \right ]$ will contain the predicted value of $Y^*$ with $95\%$ probability. This result is astonishing since even if $0.95$ is large, we could think that the good alignment of the points on FIGURE 2(c) would lead to a good confidence in our prediction. This surprising length  of interval is due to the standard deviation factor S disturbed by the scattering of the first points.
 
-\item The dependence relationship between the average fuel consumption and the car type can be expressed by the correlation coefficient $\rho$. \footnote{As asked in the instructions, we will work with the variable W which is directly related to Y.} The following r is the maximum-likelihood estimator of $\rho$ that we calculate from our dataset.
+\item We are now going to test the independence between the fuel consumption\footnote{As asked in the instructions, we will work with the variable W which is directly related to Y.} and the type of car. As the number of samples is important, we expect the average W to be relatively similar for each Z if Z has actually no impact on W. In fact these averages should equalise for a infinite number of sample. Therefore, our test hypothesis is $H_0$ : $ \mu_1= \mu_2 = \mu_3=$.
 
-$$\rho = \frac{Cov(W,Z)}{\sqrt{Var(W)\cdot Var(Z)}} \qquad r = \frac{\sum_{i=1}^n (W_i-\bar{W})(Z_i-\bar{Z})}{\sum_{i=1}^n(W_i-\bar{W})^2\sum_{i=1}^n(Z_i-\bar{Z})^2} = 0.8615$$
+Using the decomposition of the variance method (ANOVA) (close to what we did in question 4.c), we find a test statistic that follows a F distribution.
 
-If we wish to test the hypothesis that there is no correlation between W and Z, we must test $H_0$: $\rho = 0$ against $H_a$: $\rho \neq 0$. Let's use the following test statistic that follows a student t distribution with n-2 degrees of freedom. 
+\nonumber
+\begin{equation} \label{eq3}
+\begin{split}
+\sum_{i=1}^k \sum_{j=1}^{n_i} (Y_{ij}-\bar{Y})^2 & =  \sum_{i=1}^k \sum_{j=1}^{n_i}(\bar{Y}_{i}-\bar{Y})^2 + \sum_{i=1}^k \sum_{j=1}^{n_i} (Y_{ij}-\bar{Y}_i)^2\\
+ \textup{SS Total} & = \textup{SS Treatment} + \textup{SS Errors}
+\end{split}
+\end{equation}
 
-$$t = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}}$$
 
-In our case, we want to use a two-tailed test : as $\alpha = 0.05$, the rejection region is $|t|>t_{\alpha/2} = 1.9845$. The observed value $t=16.7955$ is far bigger than $t_{0.025}$ and therefore we reject $H_0$. 
+$$F = \frac{\textup{MST}}{\textup{MSE}} = \frac{\textup{SST}/(k-1)}{\textup{SSE}/(n-k)} \sim F(k-1,n-k)$$
 
-Rather than showing any independence, it even seems that there is a correlation between W and Z as $\rho$ is closer to the unity than it is to zero. This can be illustrated when comparing the average fuel consumption for each type of car. If there was no correlation, these averages should have rather similar values for a sufficiently big dataset. However, when looking at the following values:
+This is a one-tailed test : as $\alpha  = 0.05$, the rejection region is $F_{\textup{obs}} < F_{2,97,0.05} = 3.0902$. The observed value $F_{\textup{obs}}=333.7680$  is far bigger than $F_{2,97,0.05}$ and therefore we reject $H_0$. In fact, it seems that there is a correlation between the fuel consumption and the type of car. This result is not surprising since the average W for each Z are quite different.
 
 $$\bar{W}_{z=1} = -0.5959 \qquad \bar{W}_{z=2} = 0.2811 \qquad \bar{W}_{z=3} = 1.6099$$
+
+
+\item The assumptions made in the previous answer are as follows:
+\\
+$\mathbf{Equal} \mathbf{Variance}$ : As this value is unknown for each of our Z, we use the estimator $S^2$ based on the values of our dataset. The resulting estimated variances for each Z are quite similar.
+
+$$S^2_{z=1} = 0.2929 \qquad S^2_{z=2} = 0.2088 \qquad S^2_{z=3}  = 0.2730$$
+
+$\mathbf{Normality}$ : The error $\epsilon_{ij} = Y_{ij} - \mu_i$ follows a normal distribution centered around zero and with variance $\sigma^2$, the value we tried to estimate previously. To verify this assumption, we use a Jarque-Bera test on matlab : this test verifies if the values fit to a normal distribution. The tool returns the test decision with a $5\%$ significance level. Using this test, we conclude that the assumption is true.
+
+$\mathbf{Independence}$ : Our 100 observations are not related to each other meaning the position of one value won't influence the others. In fact, they don't in this case study.
 
 \end{enumerate}
 
