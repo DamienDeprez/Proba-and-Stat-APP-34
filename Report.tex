@@ -314,13 +314,49 @@ The results are written in Table 1 and shown in Figure 2.(c). The interpretation
     \caption{Coefficients of our linear regression}
 \end{table}
 
-\item 4c
+\item Let's find a way to associate a mathematical expression to this significance. We choose a method similar to the one used in ANOVA, decomposing the total variance of our dataset into a variance explained by the model and a residual variance. 
 
-\item To find the expected fuel consumption of Koenigsegg One :1, we need to remember that :
+\nonumber
+\begin{equation} \label{eq1}
+\begin{split}
+\sum_{i=1}^n(y_i-\bar{y})^2 & = \sum_{i=1}^n(\hat{y}_i-\bar{y})^2 + \sum_{i=1}^n(y_i-\hat{y}_i)^2 \qquad \textup{with} \quad \hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i \\
+ \textup{SS Total} & = \textup{SS Regression} + \textup{SS Errors}
+\end{split}
+\end{equation}
 
-$$\mathbb{E}(\ln(Y)) = \mathbb{E}(W) = \beta_1 \cdot X + \beta_0$$
+Note that SST and SSE follow a chi-square distribution with n-1 and n-2 degrees of freedom respectively. Hence, we can deduce that SSReg $\sim \chi_1^2$. Using the relationship between chi-square and F distributions, we obtain: $F = \frac{\textup{SSReg}/1}{\textup{SSE}/(n-2)} \sim F_{1,n-2}$ 
 
-When we insert the values of X (=1000 ), $\beta_1$ (=0.0041 ) and $\beta_0$ (=-1.6117), we find that the expected fuel consumption of Koenigsegg One :1 is 12,5209 [l/100km].
+This is our indicator: the closer to the infinity, the more significant  the linear effect will be. 
+We now construct a F-test with $H_0$ : $F\rightarrow + \infty $ versus $H_a$: $F< +\infty$. The value of our test statistic is F = 623.8537 which is huge. As the distribution function is gathered around numbers under 10, there is very small probability for our observed value to be reached.
+
+Let's confirm our first idea by computing the p-value which is the smallest level of significance $\alpha$ of our test for which the data value indicates that our null hypothesis should be rejected. It can be obtained by integrating our density function between 623.8537 and $+\infty$.
+
+$$\alpha = \int_{623.8}^{+\infty} F(x)_{1,98} dx  = 1- \int_0^{623.8} F(x)_{1,98} dx \approx 0$$
+
+Our result is so tiny that even our matlab tools cannot handle it and approximates it to 0. Based on the following p-value, we can conclude that the linear effect is indeed significant.
+
+\item Let us recall that W is a random variable which is normally distributed with mean $\beta_0 + \beta_1$ and variance $\sigma^2$. The following relation is the best estimator we have to find the $\hat{W^*}$ corresponding to the $\hat{X^*}$ value : the real value is approximated by the expectancy.
+
+$$\hat{W^*} = \hat{\beta}_0 + \hat{\beta}_1 x^*$$
+
+Since $Y = e^{W}$ and that $X^*=1000$, $\beta_1=0.0041$ and $\beta_0=-1.6117$, we find that the expected fuel consumption of Koenigsegg One :1 is $Y^*=$ 12,5209 [l/100km].
+
+We are now interested into finding a $95\%$ prediction interval for this value. We know that the error made using the previous estimator, is normally distributed with a null mean and a certain variance. From this, it can be shown that the following variable T possesses a Student's t distribution.
+
+$$T = \frac{W^*-\hat{W^*}}{S\sqrt{1+\frac{1}{n}+\frac{(x^*-\bar{x})^2}{S_{xx}}}} \qquad \textup{with} \quad S^2= \frac{S_{xx}}{n-1} \qquad \textup{and} \quad S_{xx} = \sum_{i=1}^n (x_i-\bar{x})^2  $$
+
+As in the confidence intervals method, we observe that $P(-t_{\alpha /2} < T < t_{\alpha /2}) = 1-\alpha$
+
+By isolating $W^*$, we obtain :
+
+$$P\left ( \hat{W^*}-t_{\alpha/2}S\sqrt{1+\frac{1}{n}+\frac{(x^*-\bar{x})^2}{S_{xx}}} < W^* < \hat{W^*}+t_{\alpha/2}S\sqrt{1+\frac{1}{n}+\frac{(x^*-\bar{x})^2}{S_{xx}}} \right ) = 1-\alpha$$
+
+Using values from our dataset and $1-\alpha = 0.95$, we get:
+
+$$P\left (1.7767 < W^* < 3.2781 \right ) = 0.95$$
+
+In terms of Y, the interval $Y \in \left [ 5.91;26.5 \right ]$ will contain the predicted value of $Y^*$ with $95\%$ probability. This result is astonishing since even if $0.95$ is large, we could think that the good alignment of the points on FIGURE 2(c) would lead to a good confidence in our prediction. This surprising length  of interval is due to the standard deviation factor S disturbed by the scattering of the first points.
+
 
 \end{enumerate}
 
