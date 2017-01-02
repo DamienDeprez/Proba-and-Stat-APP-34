@@ -114,6 +114,7 @@ Laurent \textsc{Deleu} & 6040-13-00 \\
 Nicolas \textsc{Delinte} & 4801-13-00\\
 Damien \textsc{Deprez} & 2893-13-00 \\
 Bastien \textsc{Gillon} & 5937-12-00\\
+Abbas \textsc{Sliti} & 2485-13-00\\
 
 \end{tabular}
 \end{center}
@@ -141,7 +142,7 @@ Bastien \textsc{Gillon} & 5937-12-00\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Descriptive statistics}
+\section{Part 1 : Descriptive statistics}
 
 \begin{enumerate}[(a)]
 
@@ -219,7 +220,7 @@ These values are very close to the ones calculated previously.
 
 \newpage
 
-\section{Estimation}
+\section{Part 2 : Estimation}
 
 \begin{enumerate}[(a)]
 
@@ -273,7 +274,83 @@ $$ \hat{q}_L = (1-0.05^{\frac{1}{\hat{\beta}_L}})^{\frac{1}{\hat{\alpha}_L}}$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Simulations}
+\section{Part 3 : Simulations}
+
+\begin{enumerate}[(a)]
+
+\item From the generated data,using Part 2, we can get three estimates of $q_{0.95}$.
+\\
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | }
+    \hline
+      $\hat{q}_s$ & $\hat{q}_M$ & $\hat{q}_L$
+     \\ \hline
+     0.7592566 & 0.8061234 & 0.8252839 \\ \hline
+    \end{tabular}
+\end{center}
+
+\item If we repeat this data generating process N=1000 times (with the same conditions as point (a)), we obtain a sample of size N of  each estimator of $q_{0.95}$. We can now make a histogram and a boxplot of these three samples. 
+
+\begin{figure}[!h]
+    \centering
+  \includegraphics[width = 10cm]{boxplot.png}
+  \caption{Boxplot of these three samples}
+\end{figure}
+
+As we can see from the figure 2, the data  from the three estimators are very similarly distributed around the median wich equals approximately 0.725. The best estimator seems to be the MLE because the data are the most confined around the median.
+
+\begin{figure}[!h]
+    \centering
+  \includegraphics[width = 10cm]{hist3b.png}
+  \caption{Histogram of these three samples}
+\end{figure}
+
+As we can see from the figure 3, most of the data are confined around the median. Moreover, the histograms from the the MLE and Method of moments are very similar. 
+
+\item From the samples obtained in (b), we can estimate the bias, the variance and the mean squared error of $\hat{q}_s$, $\hat{q}_M$ and $\hat{q}_L$. 
+
+\begin{center}
+    \begin{tabular}{ | l | l | l | l |}
+    \hline
+     & $\hat{q}_s$ & $\hat{q}_M$ & $\hat{q}_L$
+     \\ \hline
+    Bias & -0.008617232 & -0.1517907 & -0.009336601 \\ \hline
+    Variance & 0.005044280 & 0.004414109 & 0.003883179 \\ \hline
+    MSE & 0.005118536 & 0.004644513 & 0.003970351
+ \\
+    \hline
+    \end{tabular}
+\end{center}
+
+The most efficient estimator should be unbiased with smallest variance. So the estimator from the MLE is the best. This can be seen just by analysing the MSE. The best estimator has the lowest mean squared error. Since $\hat{q}_L$ has the smallest MSE, it is the best estimator.
+\\
+
+\item We repeat the calculations in (c) nine times for n=40,60,80,100,150,200,300,400,500. We can now compare the biases, the variances and the mean squared errors of $\hat{q}_s$, $\hat{q}_M$ and $\hat{q}_L$ graphically. 
+
+\begin{figure}[!h]
+    \centering
+  \includegraphics[width = 14cm]{3d.png}
+  \caption{Plots of the bias, variance, and mean squared error of each estimator.}
+\end{figure}
+
+We can conclude from the figure 4 that more we have observations (so n increases) better the estimator is. Again the best estimator here is the MLE because it has the smallest MSE but the curves from the Method of moments are very closed to those from MLE so it is approximately as much as efficient.
+
+
+\item By comparing the estimator $\hat{q}_L$ and $\hat{q}_s$ according the relation $\sqrt{n}(\hat{q}_L-q_{0.95})$, we can plot historgams for n=20,100,300.
+
+\begin{figure}[!h]
+    \centering
+  \includegraphics[width = 10cm]{3e.png}
+  \caption{Histograms of the three samples}
+\end{figure}
+
+We can see that when n increases the data are more confined around the median, so the estimator becomes better.
+
+
+\end{enumerate}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
